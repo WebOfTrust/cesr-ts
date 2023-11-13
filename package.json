@@ -1,0 +1,29 @@
+{
+  "name": "cesr-ts",
+  "version": "1.0.0",
+  "description": "Implement TypeScript-native CESR primitives.",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebOfTrust/cesr-ts.git"
+  },
+  "keywords": [
+    "keri",
+    "cesr",
+    "weboftrust"
+  ],
+  "author": "Jonathan Rayback",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/WebOfTrust/cesr-ts/issues"
+  },
+  "homepage": "https://github.com/WebOfTrust/cesr-ts#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
