@@ -1,7 +1,7 @@
 import { BexDex, Matter, NumDex } from './matter';
 import { CesrNumber } from './number';
 import { Fraction } from 'mathjs';
-import { math } from '../../index';
+import { math } from '../index';
 
 export class Tholder {
     private _weighted: boolean = false;

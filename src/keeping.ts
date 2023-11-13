@@ -2,7 +2,7 @@ import { Salter } from './salter';
 import { Algos, SaltyCreator, RandyCreator } from './manager';
 import { MtrDex } from './matter';
 import { Tier } from './salter';
-import { Encrypter } from '../core/encrypter';
+import { Encrypter } from './encrypter';
 import { Decrypter } from './decrypter';
 import { b } from './core';
 import { Cipher } from './cipher';

@@ -1,5 +1,5 @@
-import { randomNonce } from '../app/coring';
-import { TraitDex } from '../app/habery';
+import { randomNonce } from './app/coring';
+import { TraitDex } from './app/habery';
 import {
     Serials,
     Versionage,
@@ -7,7 +7,7 @@ import {
     Ident,
     versify,
     Ilks,
-} from '../core/core';
+} from './core';
 import { ample } from './eventing';
 import { MtrDex } from './matter';
 import { Prefixer } from './prefixer';

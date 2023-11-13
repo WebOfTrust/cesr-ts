@@ -1,7 +1,7 @@
 import { Signer } from './signer';
 import { Verfer } from './verfer';
 import { desiginput, normalize, siginput } from './httping';
-import { Signage, signature, designature } from '../end/ending';
+import { Signage, signature, designature } from './end/ending';
 import { Cigar } from './cigar';
 import { Siger } from './siger';
 export class Authenticater {
