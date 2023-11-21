@@ -1,6 +1,6 @@
 import { Matter } from '../src/matter';
 
-import { createHash } from 'blake3';
+import { blake3 } from '@noble/hashes/blake3';
 import { strict as assert } from 'assert';
 
 import { Diger } from '../src/diger';
@@ -14,8 +14,10 @@ describe('Diger', () => {
             'abcdefghijklmnopqrstuvwxyz0123456789',
             'binary'
         );
-        const hasher = createHash();
-        const digest = hasher.update(ser).digest('');
+        const digest = blake3
+          .create({})
+          .update(ser)
+          .digest()
 
         let diger = new Diger({ raw: digest });
         assert.deepStrictEqual(diger.code, MtrDex.Blake3_256);
