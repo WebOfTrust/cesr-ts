@@ -1,6 +1,5 @@
 import { BexDex, Matter, MatterArgs, MtrDex } from './matter';
 import { EmptyMaterialError } from './kering';
-import Base64 from 'urlsafe-base64';
 
 const B64REX = '^[A-Za-z0-9\\-_]*$';
 export const Reb64 = new RegExp(B64REX);
@@ -114,7 +113,7 @@ export class Bexter extends Matter {
         let wad = new Array(ws);
         wad.fill('A');
         let base = wad.join('') + bext; // pre pad with wad of zeros in Base64 == 'A'
-        let raw = Base64.decode(base); // [ls:]  // convert and remove leader
+        let raw = Buffer.from(base,'base64url'); // [ls:]  // convert and remove leader
 
         return Uint8Array.from(raw).subarray(ls); // raw binary equivalent of text
     }
@@ -122,7 +121,7 @@ export class Bexter extends Matter {
     get bext(): string {
         let sizage = Matter.Sizes.get(this.code);
         let wad = Uint8Array.from(new Array(sizage?.ls).fill(0));
-        let bext = Base64.encode(Buffer.from([...wad, ...this.raw]));
+        let bext = Buffer.from([...wad, ...this.raw]).toString('base64url');
 
         let ws = 0;
         if (sizage?.ls === 0 && bext !== undefined) {

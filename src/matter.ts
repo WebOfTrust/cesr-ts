@@ -1,7 +1,6 @@
 import { EmptyMaterialError } from './kering';
 
 import { intToB64, readInt } from './core';
-import Base64 from 'urlsafe-base64';
 import { b, d } from './core';
 import { Buffer } from 'buffer';
 
@@ -419,7 +418,7 @@ export class Matter {
                 bytes[odx] = raw[i];
             }
 
-            return both + Base64.encode(Buffer.from(bytes));
+            return both + Buffer.from(bytes).toString('base64url');
         } else {
             let both = code;
             let cs = both.length;
@@ -441,7 +440,7 @@ export class Matter {
                 bytes[odx] = raw[i];
             }
 
-            return both + Base64.encode(Buffer.from(bytes)).slice(cs % 4);
+            return both + Buffer.from(bytes).toString('base64url').slice(cs % 4);
         }
     }
 
@@ -485,7 +484,7 @@ export class Matter {
         let raw;
         if (ps != 0) {
             let base = new Array(ps + 1).join('A') + qb64.slice(cs);
-            let paw = Base64.decode(base); // decode base to leave prepadded raw
+            let paw = Buffer.from(base, 'base64url'); // decode base to leave prepadded raw
             let pi = readInt(paw.subarray(0, ps)); // prepad as int
             if (pi & (2 ** pbs - 1)) {
                 // masked pad bits non-zero
@@ -496,7 +495,7 @@ export class Matter {
             raw = paw.subarray(ps); // strip off ps prepad paw bytes
         } else {
             let base = qb64.slice(cs);
-            let paw = Base64.decode(base);
+            let paw = Buffer.from(base,'base64url');
             let li = readInt(paw.subarray(0, sizage!.ls));
             if (li != 0) {
                 if (li == 1) {
