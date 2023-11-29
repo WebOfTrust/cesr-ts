@@ -1,1 +1,1 @@
-console.log('TypeScript-native implementation of CESR primitives!')
+console.log('TypeScript-native implementation of CESR primitives!');
