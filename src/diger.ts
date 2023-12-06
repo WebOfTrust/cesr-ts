@@ -76,7 +76,7 @@ export class Diger extends Matter {
     }
 
     blake3_256(ser: Uint8Array, dig: any) {
-        let digest = blake3
+        const digest = blake3
           .create({})
           .update(ser)
           .digest()
