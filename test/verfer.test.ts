@@ -52,11 +52,6 @@ describe('Verfer', () => {
       let verfer = new Verfer({ raw: publicKey, code: MtrDex.ECDSA_256r1 });
       assert.notEqual(verfer, null);
 
-        console.log(`
-        raw: ${verfer.raw}
-        pub: ${publicKey}
-        `)
-
       assert.deepStrictEqual(verfer.raw, publicKey);
       assert.deepStrictEqual(verfer.code, MtrDex.ECDSA_256r1);
 
