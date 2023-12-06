@@ -2,7 +2,7 @@ import { MtrDex } from '../src/matter';
 import libsodium from 'libsodium-wrappers-sumo';
 import { strict as assert } from 'assert';
 import { Verfer } from '../src/verfer';
-import secp256r1 from 'ecdsa-secp256r1';
+import {p256} from '@noble/curves/p256';
 
 function base64ToUint8Array(base64: string) {
     var binaryString = atob(base64);
@@ -47,33 +47,36 @@ describe('Verfer', () => {
         );
     });
     it('should verify secp256r1', async () => {
-        const privateKey = secp256r1.generateKey();
-        const publicKey = base64ToUint8Array(
-            privateKey.toCompressedPublicKey()
-        );
-        let verfer = new Verfer({ raw: publicKey, code: MtrDex.ECDSA_256r1 });
-        assert.notEqual(verfer, null);
+      const privateKey = p256.utils.randomPrivateKey();
+      const publicKey = p256.getPublicKey(privateKey)
+      let verfer = new Verfer({ raw: publicKey, code: MtrDex.ECDSA_256r1 });
+      assert.notEqual(verfer, null);
 
-        assert.deepStrictEqual(verfer.raw, publicKey);
-        assert.deepStrictEqual(verfer.code, MtrDex.ECDSA_256r1);
+        console.log(`
+        raw: ${verfer.raw}
+        pub: ${publicKey}
+        `)
 
-        let ser = 'abcdefghijklmnopqrstuvwxyz0123456789';
+      assert.deepStrictEqual(verfer.raw, publicKey);
+      assert.deepStrictEqual(verfer.code, MtrDex.ECDSA_256r1);
 
-        let sig = privateKey.sign(ser);
+      let ser = Buffer.from('abcdefghijklmnopqrstuvwxyz0123456789','hex');
 
-        assert.equal(verfer.verify(sig, ser), true);
+      const sig = Buffer.from(p256.sign(ser, privateKey).toCompactRawBytes());
 
-        verfer = new Verfer({
-            qb64: '1AAJAwf0oSqmdjPud5gnK6bAPKkBLrXUMQZiOW4Vpc4XpOPf',
-        });
-        assert.deepStrictEqual(
-            verfer.raw,
-            new Uint8Array([
-                3, 7, 244, 161, 42, 166, 118, 51, 238, 119, 152, 39, 43, 166,
-                192, 60, 169, 1, 46, 181, 212, 49, 6, 98, 57, 110, 21, 165, 206,
-                23, 164, 227, 223,
-            ])
-        );
+      assert.equal(verfer.verify(sig, ser), true);
+
+      verfer = new Verfer({
+          qb64: '1AAJAwf0oSqmdjPud5gnK6bAPKkBLrXUMQZiOW4Vpc4XpOPf',
+      });
+      assert.deepStrictEqual(
+          verfer.raw,
+          new Uint8Array([
+              3, 7, 244, 161, 42, 166, 118, 51, 238, 119, 152, 39, 43, 166,
+              192, 60, 169, 1, 46, 181, 212, 49, 6, 98, 57, 110, 21, 165, 206,
+              23, 164, 227, 223,
+          ])
+      );
     });
     it('should not verify secp256k1', async () => {
         let publicKey = new Uint8Array([
