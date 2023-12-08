@@ -84,7 +84,7 @@ describe('Indexer', () => {
         assert.equal(qsig64.length, 88);
         let qsig64b = b(qsig64);
 
-        let qsig2b = Buffer.from(qsig64,'base64url');
+        let qsig2b = Buffer.from(qsig64, 'base64url');
         assert.equal(qsig2b.length, 66);
         // assert qsig2b == (b"\x00\x00\x99\xd2<9$$0\x9fk\xfb\x18\xa0\x8c@r\x122.k\xb2\xc7\x1fp\x0e'm"
         // b'\x8f@\xaa\xa5\x8c\xc8n\x85\xc8!\xf6q\x91p\xa9\xec\xcf\x92\xaf)'
@@ -165,7 +165,7 @@ describe('Indexer', () => {
         qsig64 =
             'AFCZ0jw5JCQwn2v7GKCMQHISMi5rsscfcA4nbY9AqqWMyG6FyCH2cZFwqezPkq8p3sr8f37Xb3wXgh3UPG8igSYJ';
         qsig64b = b(qsig64);
-        qsig2b = Buffer.from(qsig64,'base64url');
+        qsig2b = Buffer.from(qsig64, 'base64url');
         assert.equal(qsig2b.length, 66);
 
         indexer = new Indexer({ raw: sig, code: IdrDex.Ed25519_Sig, index: 5 });

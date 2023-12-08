@@ -25,10 +25,7 @@ export class Diger extends Matter {
             }
 
             if (code === MtrDex.Blake3_256) {
-                const dig = blake3
-                  .create({})
-                  .update(ser)
-                  .digest()
+                const dig = blake3.create({}).update(ser).digest();
                 super({ raw: dig, code: code });
             } else {
                 throw new Error(`Unsupported code = ${code} for digester.`);
@@ -76,10 +73,7 @@ export class Diger extends Matter {
     }
 
     blake3_256(ser: Uint8Array, dig: any) {
-        const digest = blake3
-          .create({})
-          .update(ser)
-          .digest()
+        const digest = blake3.create({}).update(ser).digest();
         return digest.toString() === dig.toString();
     }
 }

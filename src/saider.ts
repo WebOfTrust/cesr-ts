@@ -3,7 +3,7 @@ import { deversify, Dict, Serials } from './core';
 import { EmptyMaterialError } from './kering';
 import { dumps, sizeify } from './serder';
 
-import { blake3 } from '@noble/hashes/blake3'
+import { blake3 } from '@noble/hashes/blake3';
 
 const Dummy = '#';
 
@@ -74,10 +74,7 @@ export class Saider extends Matter {
         _digest_size: number,
         _length: number
     ) {
-        return blake3
-          .create({})
-          .update(ser)
-          .digest();
+        return blake3.create({}).update(ser).digest();
     }
 
     private static _derive(

@@ -148,10 +148,7 @@ export class Prefixer extends Matter {
         kd['i'] = ''.padStart(Matter.Sizes.get(MtrDex.Blake3_256)!.fs!, Dummy);
         kd['d'] = ked['i'];
         const [raw] = sizeify(ked);
-        const dig = blake3
-          .create({})
-          .update(raw)
-          .digest()
+        const dig = blake3.create({}).update(raw).digest();
         return [dig, MtrDex.Blake3_256];
     }
 

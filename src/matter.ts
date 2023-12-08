@@ -442,7 +442,12 @@ export class Matter {
                 bytes[odx] = raw[i];
             }
 
-            return both + Buffer.from(bytes).toString('base64url').slice(cs % 4);
+            return (
+                both +
+                Buffer.from(bytes)
+                    .toString('base64url')
+                    .slice(cs % 4)
+            );
         }
     }
 
@@ -497,7 +502,7 @@ export class Matter {
             raw = paw.subarray(ps); // strip off ps prepad paw bytes
         } else {
             const base = qb64.slice(cs);
-            const paw = Buffer.from(base,'base64url');
+            const paw = Buffer.from(base, 'base64url');
             const li = readInt(paw.subarray(0, sizage!.ls));
             if (li != 0) {
                 if (li == 1) {
