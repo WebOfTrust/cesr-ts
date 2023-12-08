@@ -6,6 +6,8 @@
     "scripts": {
         "start": "ts-node index.ts",
         "test": "jest",
+        "lint": "eslint --ext .ts . && prettier . --check",
+        "fix": "eslint --ext .ts . --fix && prettier . --write",
         "build": "tsc"
     },
     "repository": {
