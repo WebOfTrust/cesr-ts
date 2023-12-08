@@ -1,7 +1,7 @@
 export {};
 import libsodium from 'libsodium-wrappers-sumo';
 import { Matter, MatterArgs, MtrDex } from './matter';
-import secp256r1 from 'ecdsa-secp256r1';
+import { p256 } from '@noble/curves/p256';
 
 /**
  * @description  Verfer :sublclass of Matter,helps to verify signature of serialization
@@ -38,8 +38,8 @@ export class Verfer extends Matter {
     }
     _secp256r1(sig: any, ser: any, key: any) {
         try {
-            const publicKey = secp256r1.fromCompressedPublicKey(key);
-            return publicKey.verify(ser, sig);
+            const publicKey = key;
+            return p256.verify(sig, ser, key);
         } catch (error) {
             throw new Error(error as string);
         }

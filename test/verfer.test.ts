@@ -2,16 +2,8 @@ import { MtrDex } from '../src/matter';
 import libsodium from 'libsodium-wrappers-sumo';
 import { strict as assert } from 'assert';
 import { Verfer } from '../src/verfer';
-import secp256r1 from 'ecdsa-secp256r1';
-
-function base64ToUint8Array(base64: string) {
-    const binaryString = atob(base64);
-    const bytes = new Uint8Array(binaryString.length);
-    for (let i = 0; i < binaryString.length; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
-    }
-    return new Uint8Array(bytes.buffer);
-}
+import { p256 } from '@noble/curves/p256';
+import { Buffer } from 'buffer';
 
 describe('Verfer', () => {
     it('should verify digests', async () => {
@@ -47,19 +39,17 @@ describe('Verfer', () => {
         );
     });
     it('should verify secp256r1', async () => {
-        const privateKey = secp256r1.generateKey();
-        const publicKey = base64ToUint8Array(
-            privateKey.toCompressedPublicKey()
-        );
+        const privateKey = p256.utils.randomPrivateKey();
+        const publicKey = p256.getPublicKey(privateKey);
         let verfer = new Verfer({ raw: publicKey, code: MtrDex.ECDSA_256r1 });
         assert.notEqual(verfer, null);
 
         assert.deepStrictEqual(verfer.raw, publicKey);
         assert.deepStrictEqual(verfer.code, MtrDex.ECDSA_256r1);
 
-        const ser = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        const ser = Buffer.from('abcdefghijklmnopqrstuvwxyz0123456789', 'hex');
 
-        const sig = privateKey.sign(ser);
+        const sig = Buffer.from(p256.sign(ser, privateKey).toCompactRawBytes());
 
         assert.equal(verfer.verify(sig, ser), true);
 

@@ -1,6 +1,5 @@
 import { EmptyMaterialError } from './kering';
 import { b, b64ToInt, d, intToB64, readInt } from './core';
-import Base64 from 'urlsafe-base64';
 import { Buffer } from 'buffer';
 
 export class IndexerCodex {
@@ -399,7 +398,10 @@ export class Indexer {
         }
 
         const full =
-            both + Base64.encode(Buffer.from(bytes)).slice(ps - xizage.ls);
+            both +
+            Buffer.from(bytes)
+                .toString('base64url')
+                .slice(ps - xizage.ls);
         if (full.length != xizage.fs) {
             throw new Error(`Invalid code=${both} for raw size=${raw.length}.`);
         }
@@ -474,7 +476,7 @@ export class Indexer {
         let raw;
         if (ps != 0) {
             const base = new Array(ps + 1).join('A') + qb64.slice(cs);
-            const paw = Base64.decode(base); // decode base to leave prepadded raw
+            const paw = Buffer.from(base, 'base64url'); // decode base to leave prepadded raw
             const pi = readInt(paw.slice(0, ps)); // prepad as int
             if (pi & (2 ** pbs - 1)) {
                 // masked pad bits non-zero
@@ -485,7 +487,7 @@ export class Indexer {
             raw = paw.slice(ps); // strip off ps prepad paw bytes
         } else {
             const base = qb64.slice(cs);
-            const paw = Base64.decode(base);
+            const paw = Buffer.from(base, 'base64url');
             const li = readInt(paw.slice(0, xizage!.ls));
             if (li != 0) {
                 if (li == 1) {
