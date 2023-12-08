@@ -1,5 +1,6 @@
 import { BexDex, Matter, MatterArgs, MtrDex } from './matter';
 import { EmptyMaterialError } from './kering';
+import { Buffer } from 'buffer';
 
 const B64REX = '^[A-Za-z0-9\\-_]*$';
 export const Reb64 = new RegExp(B64REX);
@@ -113,7 +114,7 @@ export class Bexter extends Matter {
         const wad = new Array(ws);
         wad.fill('A');
         const base = wad.join('') + bext; // pre pad with wad of zeros in Base64 == 'A'
-        const raw = Buffer.from(base,'base64url'); // [ls:]  // convert and remove leader
+        const raw = Buffer.from(base, 'base64url'); // [ls:]  // convert and remove leader
 
         return Uint8Array.from(raw).subarray(ls); // raw binary equivalent of text
     }
