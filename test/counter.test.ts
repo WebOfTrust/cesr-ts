@@ -1,5 +1,7 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+
 import { Counter, CtrDex } from '../src/counter';
-import { strict as assert } from 'assert';
 import { b, b64ToInt, intToB64 } from '../src/core';
 
 describe('int to b64 and back', () => {

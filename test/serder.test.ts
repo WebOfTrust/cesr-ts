@@ -1,5 +1,7 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+
 import { deversify, Dict, Ilks, Serials, Version } from '../src/core';
-import { strict as assert } from 'assert';
 import { Salter, Tier } from '../src/salter';
 import { MtrDex } from '../src/matter';
 import { Diger } from '../src/diger';

@@ -1,4 +1,5 @@
-import { strict as assert } from 'assert';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
 
 import { Sizage } from '../src/matter';
 

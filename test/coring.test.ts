@@ -1,6 +1,8 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+
 import libsodium from 'libsodium-wrappers-sumo';
 import { b, d, b64ToInt, intToB64, intToB64b } from '../src/core';
-import { strict as assert } from 'assert';
 import { bytesToInt, intToBytes } from '../src/utils';
 
 describe('int to b64 and back', () => {

@@ -1,7 +1,9 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+
 import libsodium from 'libsodium-wrappers-sumo';
 import { Signer } from '../src/signer';
 import { Matter, MtrDex } from '../src/matter';
-import { strict as assert } from 'assert';
 import { Salter } from '../src/salter';
 import { Decrypter } from '../src/decrypter';
 import { Encrypter } from '../src/encrypter';

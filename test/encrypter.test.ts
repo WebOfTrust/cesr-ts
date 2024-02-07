@@ -1,6 +1,7 @@
-import { Matter } from '../src/matter';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
 
-import { strict as assert } from 'assert';
+import { Matter } from '../src/matter';
 import { MtrDex } from '../src/matter';
 import libsodium from 'libsodium-wrappers-sumo';
 import { Signer } from '../src/signer';
