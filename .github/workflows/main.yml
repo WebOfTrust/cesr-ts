@@ -1,0 +1,38 @@
+name: Quality Check
+on:
+    push:
+        branches:
+            - 'main'
+            - 'development'
+    pull_request:
+        branches:
+            - 'main'
+            - 'development'
+jobs:
+    build:
+        name: Build, lint, and test on Node 18.12.1 and ${{ matrix.os }}
+
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: [ubuntu-latest, macOS-latest]
+                node: [18.12.1]
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v2
+
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: '18.12.1'
+                  cache: 'npm'
+            - name: Install dependencies
+              run: |
+                  npm cache clean --force
+                  npm set-registery https://registry.npmjs.org/
+                  npm ci
+            - name: Check formmatting
+              run: npm run lint
+            - name: Run tests
+              run: npm test
+            - name: Build
+              run: npm run build
