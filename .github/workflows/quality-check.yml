@@ -1,0 +1,28 @@
+name: quality-check
+run-name: ${{ github.actor }} triggered a quality check
+on: [push]
+jobs:
+    quality-check:
+        name: run-check for ${{ matrix.os }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: [ubuntu-latest, macos-latest]
+        steps:
+            - uses: actions/checkout@v4.1.1
+            - uses: actions/setup-node@v4.0.2
+              with:
+                  # Use Node 20 LTS
+                  node-version: 'lts/Iron'
+            # Install dependencies
+            - run: npm cache clean --force
+            - run: npm set registry https://registry.npmjs.org/
+            - run: npm ci
+            # Run tests
+            - run: npm run test
+            # Check formatting
+            - run: npm run formatting
+            # Run linter
+            - run: npm run lint
+            # Ensure code compiles
+            - run: npm run build
