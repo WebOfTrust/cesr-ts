@@ -1,8 +1,8 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+
 import { Matter } from '../src/matter';
-
 import { blake3 } from '@noble/hashes/blake3';
-import { strict as assert } from 'assert';
-
 import { Diger } from '../src/diger';
 import { MtrDex } from '../src/matter';
 import { Buffer } from 'buffer';

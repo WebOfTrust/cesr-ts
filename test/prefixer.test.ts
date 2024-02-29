@@ -1,8 +1,10 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+
 import libsodium from 'libsodium-wrappers-sumo';
 import { Dict, Ident, Ilks, Serials, versify, Versionage } from '../src/core';
 import { MtrDex } from '../src/matter';
 import { Prefixer } from '../src/prefixer';
-import { strict as assert } from 'assert';
 
 describe('Prefixer', () => {
     it('should create autonomic identifier prefix using derivation as determined by code from ked', async () => {

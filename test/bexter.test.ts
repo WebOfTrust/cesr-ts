@@ -1,4 +1,6 @@
-import { strict as assert } from 'assert';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+
 import { Bexter } from '../src/bexter';
 import { b } from '../src/core';
 import { MtrDex } from '../src/matter';
