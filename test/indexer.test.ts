@@ -1,5 +1,7 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+
 import libsodium from 'libsodium-wrappers-sumo';
-import { strict as assert } from 'assert';
 import { IdrDex, Indexer } from '../src/indexer';
 import { b, intToB64 } from '../src/core';
 import { Buffer } from 'buffer';

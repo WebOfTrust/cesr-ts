@@ -1,5 +1,7 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+
 import { Dict, Ident, Serials, versify, Versionage } from '../src/core';
-import { strict as assert } from 'assert';
 import { MtrDex } from '../src/matter';
 import libsodium from 'libsodium-wrappers-sumo';
 import { Saider } from '../src/saider';

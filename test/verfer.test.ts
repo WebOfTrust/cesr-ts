@@ -1,6 +1,8 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+
 import { MtrDex } from '../src/matter';
 import libsodium from 'libsodium-wrappers-sumo';
-import { strict as assert } from 'assert';
 import { Verfer } from '../src/verfer';
 import { p256 } from '@noble/curves/p256';
 import { Buffer } from 'buffer';
@@ -71,8 +73,11 @@ describe('Verfer', () => {
             187, 162, 251, 58, 206, 241, 203, 27, 76, 236, 37, 189, 148, 240,
             178, 204, 133, 31,
         ]);
-        expect(function () {
-            new Verfer({ raw: publicKey, code: MtrDex.ECDSA_256k1 });
-        }).toThrow(new Error(`Unsupported code = 1AAB for verifier.`));
+        assert.throws(
+            function () {
+                new Verfer({ raw: publicKey, code: MtrDex.ECDSA_256k1 });
+            },
+            { message: 'Unsupported code = 1AAB for verifier.' }
+        );
     });
 });
