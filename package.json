@@ -3,9 +3,9 @@
     "version": "1.0.0",
     "description": "Implement TypeScript-native CESR primitives.",
     "main": "index.js",
-   "scripts": {
+    "scripts": {
         "start": "ts-node index.ts",
-        "test": "jest",
+        "test": "node --test --require ts-node/register **/*.test.ts",
         "formatting": "prettier . --check",
         "lint": "eslint --ext .ts .",
         "fix-lint": "eslint --ext .ts . --fix",
